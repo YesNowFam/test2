@@ -1,0 +1,971 @@
+Loading training set...
+C:\Users\ahmed\anaconda3\envs\pytorch2\Lib\site-packages\torch\utils\data\sampler.py:64: UserWarning: `data_source` argument is not used and will be removed in 2.2.0.You may still have custom implementation that utilizes it.
+  warnings.warn("`data_source` argument is not used and will be removed in 2.2.0."
+
+Num images:  5000
+Image shape: [3, 128, 128]
+Label shape: [0]
+
+Constructing networks...
+Setting up PyTorch plugin "bias_act_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\bias_act.py:50: UserWarning: Failed to build CUDA kernels for bias_act. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\bias_act.py", line 48, in _init
+    _plugin = custom_ops.get_plugin('bias_act_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for bias_act. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+
+Generator             Parameters  Buffers  Output shape         Datatype
+---                   ---         ---      ---                  ---     
+mapping.fc0           262656      -        [16, 512]            float32 
+mapping.fc1           262656      -        [16, 512]            float32 
+mapping               -           512      [16, 12, 512]        float32 
+synthesis.b4.conv1    2622465     32       [16, 512, 4, 4]      float32 
+synthesis.b4.torgb    264195      -        [16, 3, 4, 4]        float32 
+synthesis.b4:0        8192        16       [16, 512, 4, 4]      float32 
+synthesis.b4:1        -           -        [16, 512, 4, 4]      float32 
+synthesis.b8.conv0    2622465     80       [16, 512, 8, 8]      float32 
+synthesis.b8.conv1    2622465     80       [16, 512, 8, 8]      float32 
+synthesis.b8.torgb    264195      -        [16, 3, 8, 8]        float32 
+synthesis.b8:0        -           16       [16, 512, 8, 8]      float32 
+synthesis.b8:1        -           -        [16, 512, 8, 8]      float32 
+synthesis.b16.conv0   2622465     272      [16, 512, 16, 16]    float16 
+synthesis.b16.conv1   2622465     272      [16, 512, 16, 16]    float16 
+synthesis.b16.torgb   264195      -        [16, 3, 16, 16]      float16 
+synthesis.b16:0       -           16       [16, 512, 16, 16]    float16 
+synthesis.b16:1       -           -        [16, 512, 16, 16]    float32 
+synthesis.b32.conv0   2622465     1040     [16, 512, 32, 32]    float16 
+synthesis.b32.conv1   2622465     1040     [16, 512, 32, 32]    float16 
+synthesis.b32.torgb   264195      -        [16, 3, 32, 32]      float16 
+synthesis.b32:0       -           16       [16, 512, 32, 32]    float16 
+synthesis.b32:1       -           -        [16, 512, 32, 32]    float32 
+synthesis.b64.conv0   1442561     4112     [16, 256, 64, 64]    float16 
+synthesis.b64.conv1   721409      4112     [16, 256, 64, 64]    float16 
+synthesis.b64.torgb   132099      -        [16, 3, 64, 64]      float16 
+synthesis.b64:0       -           16       [16, 256, 64, 64]    float16 
+synthesis.b64:1       -           -        [16, 256, 64, 64]    float32 
+synthesis.b128.conv0  426369      16400    [16, 128, 128, 128]  float16 
+synthesis.b128.conv1  213249      16400    [16, 128, 128, 128]  float16 
+synthesis.b128.torgb  66051       -        [16, 3, 128, 128]    float16 
+synthesis.b128:0      -           16       [16, 128, 128, 128]  float16 
+synthesis.b128:1      -           -        [16, 128, 128, 128]  float32 
+---                   ---         ---      ---                  ---     
+Total                 22949277    44448    -                    -       
+
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+
+Discriminator  Parameters  Buffers  Output shape         Datatype
+---            ---         ---      ---                  ---     
+b128.fromrgb   512         16       [16, 128, 128, 128]  float16 
+b128.skip      32768       16       [16, 256, 64, 64]    float16 
+b128.conv0     147584      16       [16, 128, 128, 128]  float16 
+b128.conv1     295168      16       [16, 256, 64, 64]    float16 
+b128           -           16       [16, 256, 64, 64]    float16 
+b64.skip       131072      16       [16, 512, 32, 32]    float16 
+b64.conv0      590080      16       [16, 256, 64, 64]    float16 
+b64.conv1      1180160     16       [16, 512, 32, 32]    float16 
+b64            -           16       [16, 512, 32, 32]    float16 
+b32.skip       262144      16       [16, 512, 16, 16]    float16 
+b32.conv0      2359808     16       [16, 512, 32, 32]    float16 
+b32.conv1      2359808     16       [16, 512, 16, 16]    float16 
+b32            -           16       [16, 512, 16, 16]    float16 
+b16.skip       262144      16       [16, 512, 8, 8]      float16 
+b16.conv0      2359808     16       [16, 512, 16, 16]    float16 
+b16.conv1      2359808     16       [16, 512, 8, 8]      float16 
+b16            -           16       [16, 512, 8, 8]      float16 
+b8.skip        262144      16       [16, 512, 4, 4]      float32 
+b8.conv0       2359808     16       [16, 512, 8, 8]      float32 
+b8.conv1       2359808     16       [16, 512, 4, 4]      float32 
+b8             -           16       [16, 512, 4, 4]      float32 
+b4.mbstd       -           -        [16, 513, 4, 4]      float32 
+b4.conv        2364416     16       [16, 512, 4, 4]      float32 
+b4.fc          4194816     -        [16, 512]            float32 
+b4.out         513         -        [16, 1]              float32 
+---            ---         ---      ---                  ---     
+Total          23882369    352      -                    -       
+
+Setting up augmentation...
+Distributing across 1 GPUs...
+Setting up training phases...
+Exporting sample images...
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... Failed!
+C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py:34: UserWarning: Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\ops\upfirdn2d.py", line 32, in _init
+    _plugin = custom_ops.get_plugin('upfirdn2d_plugin', sources=sources, extra_cuda_cflags=['--use_fast_math'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py", line 64, in get_plugin
+    raise RuntimeError(f'Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "{__file__}".')
+RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check _find_compiler_bindir() in "C:\Users\ahmed\Documents\TheCircle\stylegan2-ada-pytorch\torch_utils\custom_ops.py".
+
+  warnings.warn('Failed to build CUDA kernels for upfirdn2d. Falling back to slow reference implementation. Details:\n\n' + traceback.format_exc())
+Setting up PyTorch plugin "upfirdn2d_plugin"... 
