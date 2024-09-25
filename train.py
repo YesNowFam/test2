@@ -5,7 +5,7 @@ import tempfile
 import torch
 import dnnlib
 import argparse
-
+import sys
 from training import training_loop
 from metrics import metric_main
 from torch_utils import training_stats
@@ -369,7 +369,7 @@ def parse_comma_separated(s):
 
 #----------------------------------------------------------------------------
 
-def main():
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train a StyleGAN2 ADA")
     
     # General options
@@ -444,7 +444,7 @@ def main():
         )
     except UserError as err:
         print(f"Error: {err}")
-        return
+        sys.exit(0)
 
     # Pick output directory.
     prev_run_dirs = []
@@ -474,7 +474,7 @@ def main():
     # Dry run?
     if args.dry_run:
         print('Dry run; exiting.')
-        return
+        sys.exit(0)
 
     # Create output directory.
     print('Creating output directory...')
@@ -490,11 +490,5 @@ def main():
             subprocess_fn(rank=0, args=args_dict, temp_dir=temp_dir)
         else:
             torch.multiprocessing.spawn(fn=subprocess_fn, args=(args_dict, temp_dir), nprocs=args_dict['num_gpus'])
-
-
-#----------------------------------------------------------------------------
-
-if __name__ == "__main__":
-    main() # pylint: disable=no-value-for-parameter
 
 #----------------------------------------------------------------------------
