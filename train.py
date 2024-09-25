@@ -279,22 +279,11 @@ def setup_training_loop_kwargs(
     # Transfer learning: resume, freezed
     # ----------------------------------
 
-    resume_specs = {
-        'ffhq256':     'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/transfer-learning-source-nets/ffhq-res256-mirror-paper256-noaug.pkl',
-        'ffhq512':     'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/transfer-learning-source-nets/ffhq-res512-mirror-stylegan2-noaug.pkl',
-        'ffhq1024':    'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/transfer-learning-source-nets/ffhq-res1024-mirror-stylegan2-noaug.pkl',
-        'celebahq256': 'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/transfer-learning-source-nets/celebahq-res256-mirror-paper256-kimg100000-ada-target0.5.pkl',
-        'lsundog256':  'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/transfer-learning-source-nets/lsundog-res256-paper256-kimg100000-noaug.pkl',
-    }
-
     assert resume is None or isinstance(resume, str)
     if resume is None:
         resume = 'noresume'
     elif resume == 'noresume':
         desc += '-noresume'
-    elif resume in resume_specs:
-        desc += f'-resume{resume}'
-        args.resume_pkl = resume_specs[resume] # predefined url
     else:
         desc += '-resumecustom'
         args.resume_pkl = resume # custom path or url
@@ -381,7 +370,7 @@ def parse_comma_separated(s):
 #----------------------------------------------------------------------------
 
 def main():
-    parser = argparse.ArgumentParser(description="Train a GAN using the techniques described in the paper 'Training Generative Adversarial Networks with Limited Data'.")
+    parser = argparse.ArgumentParser(description="Train a StyleGAN2 ADA")
     
     # General options
     parser.add_argument('--outdir', help='Where to save the results', required=True, metavar='DIR')
