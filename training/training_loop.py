@@ -4,113 +4,57 @@ import copy
 import json
 import pickle
 import psutil
-import PIL.Image
 import numpy as np
-import torch
+
 import dnnlib
+
+import torch
 from torch_utils import misc
 from torch_utils import training_stats
 from torch_utils.ops import conv2d_gradfix
 from torch_utils.ops import grid_sample_gradfix
 
+from grid import generate_dataset_preview_grid, save_image_grid
+
 import legacy
 from metrics import metric_main
 
-#----------------------------------------------------------------------------
-
-def setup_snapshot_image_grid(training_set, random_seed=0):
-    rnd = np.random.RandomState(random_seed)
-    gw = np.clip(7680 // training_set.image_shape[2], 7, 32)
-    gh = np.clip(4320 // training_set.image_shape[1], 4, 32)
-
-    # No labels => show random subset of training samples.
-    if not training_set.has_labels:
-        all_indices = list(range(len(training_set)))
-        rnd.shuffle(all_indices)
-        grid_indices = [all_indices[i % len(all_indices)] for i in range(gw * gh)]
-
-    else:
-        # Group training samples by label.
-        label_groups = dict() # label => [idx, ...]
-        for idx in range(len(training_set)):
-            label = tuple(training_set.get_details(idx).raw_label.flat[::-1])
-            if label not in label_groups:
-                label_groups[label] = []
-            label_groups[label].append(idx)
-
-        # Reorder.
-        label_order = sorted(label_groups.keys())
-        for label in label_order:
-            rnd.shuffle(label_groups[label])
-
-        # Organize into grid.
-        grid_indices = []
-        for y in range(gh):
-            label = label_order[y % len(label_order)]
-            indices = label_groups[label]
-            grid_indices += [indices[x % len(indices)] for x in range(gw)]
-            label_groups[label] = [indices[(i + gw) % len(indices)] for i in range(len(indices))]
-
-    # Load data.
-    images, labels = zip(*[training_set[i] for i in grid_indices])
-    return (gw, gh), np.stack(images), np.stack(labels)
-
-#----------------------------------------------------------------------------
-
-def save_image_grid(img, fname, drange, grid_size):
-    lo, hi = drange
-    img = np.asarray(img, dtype=np.float32)
-    img = (img - lo) * (255 / (hi - lo))
-    img = np.rint(img).clip(0, 255).astype(np.uint8)
-
-    gw, gh = grid_size
-    _N, C, H, W = img.shape
-    img = img.reshape(gh, gw, C, H, W)
-    img = img.transpose(0, 3, 1, 4, 2)
-    img = img.reshape(gh * H, gw * W, C)
-
-    assert C in [1, 3]
-    if C == 1:
-        PIL.Image.fromarray(img[:, :, 0], 'L').save(fname)
-    if C == 3:
-        PIL.Image.fromarray(img, 'RGB').save(fname)
-
-#----------------------------------------------------------------------------
 
 def training_loop(
-    run_dir                 = '.',      # Output directory.
-    training_set_kwargs     = {},       # Options for training set.
-    data_loader_kwargs      = {},       # Options for torch.utils.data.DataLoader.
-    G_kwargs                = {},       # Options for generator network.
-    D_kwargs                = {},       # Options for discriminator network.
-    G_opt_kwargs            = {},       # Options for generator optimizer.
-    D_opt_kwargs            = {},       # Options for discriminator optimizer.
-    augment_kwargs          = None,     # Options for augmentation pipeline. None = disable.
-    loss_kwargs             = {},       # Options for loss function.
-    metrics                 = [],       # Metrics to evaluate during training.
-    random_seed             = 0,        # Global random seed.
-    num_gpus                = 1,        # Number of GPUs participating in the training.
-    rank                    = 0,        # Rank of the current process in [0, num_gpus[.
-    batch_size              = 4,        # Total batch size for one training iteration. Can be larger than batch_gpu * num_gpus.
-    batch_gpu               = 4,        # Number of samples processed at a time by one GPU.
-    ema_kimg                = 10,       # Half-life of the exponential moving average (EMA) of generator weights.
-    ema_rampup              = None,     # EMA ramp-up coefficient.
-    G_reg_interval          = 4,        # How often to perform regularization for G? None = disable lazy regularization.
-    D_reg_interval          = 16,       # How often to perform regularization for D? None = disable lazy regularization.
-    augment_p               = 0,        # Initial value of augmentation probability.
-    ada_target              = None,     # ADA target value. None = fixed p.
-    ada_interval            = 4,        # How often to perform ADA adjustment?
-    ada_kimg                = 500,      # ADA adjustment speed, measured in how many kimg it takes for p to increase/decrease by one unit.
-    total_kimg              = 25000,    # Total length of the training, measured in thousands of real images.
-    kimg_per_tick           = 4,        # Progress snapshot interval.
-    image_snapshot_ticks    = 50,       # How often to save image snapshots? None = disable.
-    network_snapshot_ticks  = 50,       # How often to save network snapshots? None = disable.
-    resume_pkl              = None,     # Network pickle to resume training from.
-    cudnn_benchmark         = True,     # Enable torch.backends.cudnn.benchmark?
-    allow_tf32              = False,    # Enable torch.backends.cuda.matmul.allow_tf32 and torch.backends.cudnn.allow_tf32?
-    abort_fn                = None,     # Callback function for determining whether to abort training. Must return consistent results across ranks.
+    run_dir                 = '.',      # Output directory for results and checkpoints
+    training_set_kwargs     = {},       # Options for training dataset
+    data_loader_kwargs      = {},       # Options for torch.utils.data.DataLoader
+    G_kwargs                = {},       # Options for generator network
+    D_kwargs                = {},       # Options for discriminator network
+    G_opt_kwargs            = {},       # Options for generator optimizer
+    D_opt_kwargs            = {},       # Options for discriminator optimizer
+    augment_kwargs          = None,     # Options for augmentation pipeline (None = disable)
+    loss_kwargs             = {},       # Options for loss function
+    metrics                 = [],       # Metrics to evaluate during training
+    random_seed             = 0,        # Global random seed for reproducibility
+    num_gpus                = 1,        # Number of GPUs for distributed training
+    rank                    = 0,        # Rank of current process in multi-GPU setup (0 to num_gpus-1)
+    batch_size              = 4,        # Total batch size for one training iteration
+    batch_gpu               = 4,        # Number of samples processed at a time by one GPU
+    ema_kimg                = 10,       # Half-life of exponential moving average (EMA) of generator weights
+    ema_rampup              = None,     # EMA ramp-up coefficient for smooth startup
+    G_reg_interval          = 4,        # Frequency of generator regularization (None = disable)
+    D_reg_interval          = 16,       # Frequency of discriminator regularization (None = disable)
+    augment_p               = 0,        # Initial augmentation probability
+    ada_target              = None,     # ADA target value (None for fixed augmentation probability)
+    ada_interval            = 4,        # Frequency of ADA adjustments
+    ada_kimg                = 500,      # ADA adjustment speed (lower is faster)
+    total_kimg              = 25000,    # Total length of training in thousands of images
+    kimg_per_tick           = 4,        # Progress snapshot interval in thousands of images
+    image_snapshot_ticks    = 50,       # Frequency of saving image snapshots (None to disable)
+    network_snapshot_ticks  = 50,       # Frequency of saving network checkpoints (None to disable)
+    resume_pkl              = None,     # Network pickle to resume training from
+    cudnn_benchmark         = True,     # Enable cuDNN benchmarking for potential performance boost
+    allow_tf32              = False,    # Allow TensorFloat-32 on Ampere GPUs
+    abort_fn                = None,     # Callback function to determine if training should be aborted. Must return consistent results across ranks.
     progress_fn             = None,     # Callback function for updating training progress. Called for all ranks.
 ):
+    
     # Initialize.
     start_time = time.time()
     device = torch.device('cuda', rank)
@@ -211,7 +155,7 @@ def training_loop(
     grid_c = None
     if rank == 0:
         print('Exporting sample images...')
-        grid_size, images, labels = setup_snapshot_image_grid(training_set=training_set)
+        grid_size, images, labels = generate_dataset_preview_grid(training_set=training_set)
         save_image_grid(images, os.path.join(run_dir, 'reals.png'), drange=[0,255], grid_size=grid_size)
         grid_z = torch.randn([labels.shape[0], G.z_dim], device=device).split(batch_gpu)
         grid_c = torch.from_numpy(labels).to(device).split(batch_gpu)
@@ -409,5 +353,3 @@ def training_loop(
     if rank == 0:
         print()
         print('Exiting...')
-
-#----------------------------------------------------------------------------
