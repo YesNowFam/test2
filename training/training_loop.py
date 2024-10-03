@@ -14,7 +14,7 @@ from torch_utils import training_stats
 from torch_utils.ops import conv2d_gradfix
 from torch_utils.ops import grid_sample_gradfix
 
-from grid import generate_dataset_preview_grid, save_image_grid
+from .grid import generate_dataset_preview_grid, save_image_grid
 
 import legacy
 from metrics import metric_main
