@@ -19,6 +19,20 @@ from .grid import generate_dataset_preview_grid, save_image_grid
 import legacy
 from metrics import metric_main
 
+def _load_training_set(rank, training_set_kwargs, num_gpus, random_seed, batch_size, data_loader_kwargs):
+    if rank == 0:
+        print('Loading training set...')
+    training_set = dnnlib.util.construct_class_by_name(**training_set_kwargs) # subclass of training.dataset.Dataset
+    training_set_sampler = misc.InfiniteSampler(dataset=training_set, rank=rank, num_replicas=num_gpus, seed=random_seed)
+    training_set_iterator = iter(torch.utils.data.DataLoader(dataset=training_set, sampler=training_set_sampler, batch_size=batch_size//num_gpus, **data_loader_kwargs))
+    if rank == 0:
+        print()
+        print('Num images: ', len(training_set))
+        print('Image shape:', training_set.image_shape)
+        print('Label shape:', training_set.label_shape)
+        print()
+
+    return training_set, training_set_sampler, training_set_iterator
 
 def training_loop(
     run_dir                 = '.',      # Output directory for results and checkpoints
@@ -67,17 +81,8 @@ def training_loop(
     grid_sample_gradfix.enabled = True                  # Avoids errors with the augmentation pipe.
 
     # Load training set.
-    if rank == 0:
-        print('Loading training set...')
-    training_set = dnnlib.util.construct_class_by_name(**training_set_kwargs) # subclass of training.dataset.Dataset
-    training_set_sampler = misc.InfiniteSampler(dataset=training_set, rank=rank, num_replicas=num_gpus, seed=random_seed)
-    training_set_iterator = iter(torch.utils.data.DataLoader(dataset=training_set, sampler=training_set_sampler, batch_size=batch_size//num_gpus, **data_loader_kwargs))
-    if rank == 0:
-        print()
-        print('Num images: ', len(training_set))
-        print('Image shape:', training_set.image_shape)
-        print('Label shape:', training_set.label_shape)
-        print()
+    training_set, training_set_sampler, training_set_iterator = _load_training_set(rank, training_set_kwargs, num_gpus, random_seed, batch_size, data_loader_kwargs)
+    
 
     # Construct networks.
     if rank == 0:
