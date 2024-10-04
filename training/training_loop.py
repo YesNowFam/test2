@@ -85,6 +85,33 @@ def _distribute_across_gpus(rank, num_gpus, G, D, G_ema, augment_pipe, device):
 
     return ddp_modules
 
+def _setup_training_phases(rank, ddp_modules, loss_kwargs, G, G_opt_kwargs, G_reg_interval, D, D_opt_kwargs, D_reg_interval, device):
+    if rank == 0:
+        print('Setting up training phases...')
+    loss = dnnlib.util.construct_class_by_name(device=device, **ddp_modules, **loss_kwargs) # subclass of training.loss.Loss
+    phases = []
+    for name, module, opt_kwargs, reg_interval in [('G', G, G_opt_kwargs, G_reg_interval), ('D', D, D_opt_kwargs, D_reg_interval)]:
+        if reg_interval is None:
+            opt = dnnlib.util.construct_class_by_name(params=module.parameters(), **opt_kwargs) # subclass of torch.optim.Optimizer
+            phases += [dnnlib.EasyDict(name=name+'both', module=module, opt=opt, interval=1)]
+        else: # Lazy regularization.
+            mb_ratio = reg_interval / (reg_interval + 1)
+            opt_kwargs = dnnlib.EasyDict(opt_kwargs)
+            opt_kwargs.lr = opt_kwargs.lr * mb_ratio
+            opt_kwargs.betas = [beta ** mb_ratio for beta in opt_kwargs.betas]
+            opt = dnnlib.util.construct_class_by_name(module.parameters(), **opt_kwargs) # subclass of torch.optim.Optimizer
+            phases += [dnnlib.EasyDict(name=name+'main', module=module, opt=opt, interval=1)]
+            phases += [dnnlib.EasyDict(name=name+'reg', module=module, opt=opt, interval=reg_interval)]
+    for phase in phases:
+        phase.start_event = None
+        phase.end_event = None
+        if rank == 0:
+            phase.start_event = torch.cuda.Event(enable_timing=True)
+            phase.end_event = torch.cuda.Event(enable_timing=True)
+
+    return loss, phases
+
+
 def training_loop(
     run_dir                 = '.',      # Output directory for results and checkpoints
     training_set_kwargs     = {},       # Options for training dataset
@@ -155,30 +182,9 @@ def training_loop(
     # Distribute across GPUs.
     ddp_modules = _distribute_across_gpus(rank, num_gpus, G, D, G_ema, augment_pipe, device)
     
-
     # Setup training phases.
-    if rank == 0:
-        print('Setting up training phases...')
-    loss = dnnlib.util.construct_class_by_name(device=device, **ddp_modules, **loss_kwargs) # subclass of training.loss.Loss
-    phases = []
-    for name, module, opt_kwargs, reg_interval in [('G', G, G_opt_kwargs, G_reg_interval), ('D', D, D_opt_kwargs, D_reg_interval)]:
-        if reg_interval is None:
-            opt = dnnlib.util.construct_class_by_name(params=module.parameters(), **opt_kwargs) # subclass of torch.optim.Optimizer
-            phases += [dnnlib.EasyDict(name=name+'both', module=module, opt=opt, interval=1)]
-        else: # Lazy regularization.
-            mb_ratio = reg_interval / (reg_interval + 1)
-            opt_kwargs = dnnlib.EasyDict(opt_kwargs)
-            opt_kwargs.lr = opt_kwargs.lr * mb_ratio
-            opt_kwargs.betas = [beta ** mb_ratio for beta in opt_kwargs.betas]
-            opt = dnnlib.util.construct_class_by_name(module.parameters(), **opt_kwargs) # subclass of torch.optim.Optimizer
-            phases += [dnnlib.EasyDict(name=name+'main', module=module, opt=opt, interval=1)]
-            phases += [dnnlib.EasyDict(name=name+'reg', module=module, opt=opt, interval=reg_interval)]
-    for phase in phases:
-        phase.start_event = None
-        phase.end_event = None
-        if rank == 0:
-            phase.start_event = torch.cuda.Event(enable_timing=True)
-            phase.end_event = torch.cuda.Event(enable_timing=True)
+    loss, phases = _setup_training_phases(rank, ddp_modules, loss_kwargs, G, G_opt_kwargs, G_reg_interval, D, D_opt_kwargs, D_reg_interval, device)
+    
 
     # Export sample images.
     grid_size = None
