@@ -19,6 +19,7 @@ from .grid import generate_dataset_preview_grid, save_image_grid
 import legacy
 from metrics import metric_main
 
+
 def _load_training_set(rank, training_set_kwargs, num_gpus, random_seed, batch_size, data_loader_kwargs):
     if rank == 0:
         print('Loading training set...')
@@ -32,7 +33,25 @@ def _load_training_set(rank, training_set_kwargs, num_gpus, random_seed, batch_s
         print('Label shape:', training_set.label_shape)
         print()
 
-    return training_set, training_set_sampler, training_set_iterator
+    return training_set, training_set_iterator
+
+def _construct_networks(rank, training_set, G_kwargs, D_kwargs, device):
+    if rank == 0:
+            print('Constructing networks...')
+    common_kwargs = dict(c_dim=training_set.label_dim, img_resolution=training_set.resolution, img_channels=training_set.num_channels)
+    G = dnnlib.util.construct_class_by_name(**G_kwargs, **common_kwargs).train().requires_grad_(False).to(device) # subclass of torch.nn.Module
+    D = dnnlib.util.construct_class_by_name(**D_kwargs, **common_kwargs).train().requires_grad_(False).to(device) # subclass of torch.nn.Module
+    G_ema = copy.deepcopy(G).eval()
+
+    return G, D, G_ema
+
+
+def _print_summary(rank, batch_gpu, G, D, device):
+    if rank == 0:
+        z = torch.empty([batch_gpu, G.z_dim], device=device)
+        c = torch.empty([batch_gpu, G.c_dim], device=device)
+        img = misc.print_module_summary(G, [z, c])
+        misc.print_module_summary(D, [img, c])
 
 def training_loop(
     run_dir                 = '.',      # Output directory for results and checkpoints
@@ -81,18 +100,13 @@ def training_loop(
     grid_sample_gradfix.enabled = True                  # Avoids errors with the augmentation pipe.
 
     # Load training set.
-    training_set, training_set_sampler, training_set_iterator = _load_training_set(rank, training_set_kwargs, num_gpus, random_seed, batch_size, data_loader_kwargs)
+    training_set, training_set_iterator = _load_training_set(rank, training_set_kwargs, num_gpus, random_seed, batch_size, data_loader_kwargs)
+    
+    # Construct networks. Generator, Discriminator, and Exponential Moving Average Generator.
+    G, D, G_ema = _construct_networks(rank, training_set, G_kwargs, D_kwargs, device)
     
 
-    # Construct networks.
-    if rank == 0:
-        print('Constructing networks...')
-    common_kwargs = dict(c_dim=training_set.label_dim, img_resolution=training_set.resolution, img_channels=training_set.num_channels)
-    G = dnnlib.util.construct_class_by_name(**G_kwargs, **common_kwargs).train().requires_grad_(False).to(device) # subclass of torch.nn.Module
-    D = dnnlib.util.construct_class_by_name(**D_kwargs, **common_kwargs).train().requires_grad_(False).to(device) # subclass of torch.nn.Module
-    G_ema = copy.deepcopy(G).eval()
-
-    # Resume from existing pickle.
+    # Resume training from existing pickle.
     if (resume_pkl is not None) and (rank == 0):
         print(f'Resuming from "{resume_pkl}"')
         with dnnlib.util.open_url(resume_pkl) as f:
@@ -101,11 +115,7 @@ def training_loop(
             misc.copy_params_and_buffers(resume_data[name], module, require_all=False)
 
     # Print network summary tables.
-    if rank == 0:
-        z = torch.empty([batch_gpu, G.z_dim], device=device)
-        c = torch.empty([batch_gpu, G.c_dim], device=device)
-        img = misc.print_module_summary(G, [z, c])
-        misc.print_module_summary(D, [img, c])
+    _print_summary(rank, batch_gpu, G, D, device)
 
     # Setup augmentation.
     if rank == 0:
