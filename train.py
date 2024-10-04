@@ -1,22 +1,11 @@
-# Copyright (c) 2021, NVIDIA CORPORATION.  All rights reserved.
-#
-# NVIDIA CORPORATION and its licensors retain all intellectual property
-# and proprietary rights in and to this software, related documentation
-# and any modifications thereto.  Any use, reproduction, disclosure or
-# distribution of this software and related documentation without an express
-# license agreement from NVIDIA CORPORATION is strictly prohibited.
-
-"""Train a GAN using the techniques described in the paper
-"Training Generative Adversarial Networks with Limited Data"."""
-
 import os
-import click
 import re
 import json
 import tempfile
 import torch
 import dnnlib
-
+import argparse
+import sys
 from training import training_loop
 from metrics import metric_main
 from torch_utils import training_stats
@@ -290,22 +279,11 @@ def setup_training_loop_kwargs(
     # Transfer learning: resume, freezed
     # ----------------------------------
 
-    resume_specs = {
-        'ffhq256':     'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/transfer-learning-source-nets/ffhq-res256-mirror-paper256-noaug.pkl',
-        'ffhq512':     'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/transfer-learning-source-nets/ffhq-res512-mirror-stylegan2-noaug.pkl',
-        'ffhq1024':    'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/transfer-learning-source-nets/ffhq-res1024-mirror-stylegan2-noaug.pkl',
-        'celebahq256': 'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/transfer-learning-source-nets/celebahq-res256-mirror-paper256-kimg100000-ada-target0.5.pkl',
-        'lsundog256':  'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/transfer-learning-source-nets/lsundog-res256-paper256-kimg100000-noaug.pkl',
-    }
-
     assert resume is None or isinstance(resume, str)
     if resume is None:
         resume = 'noresume'
     elif resume == 'noresume':
         desc += '-noresume'
-    elif resume in resume_specs:
-        desc += f'-resume{resume}'
-        args.resume_pkl = resume_specs[resume] # predefined url
     else:
         desc += '-resumecustom'
         args.resume_pkl = resume # custom path or url
@@ -384,157 +362,133 @@ def subprocess_fn(rank, args, temp_dir):
 
 #----------------------------------------------------------------------------
 
-class CommaSeparatedList(click.ParamType):
-    name = 'list'
-
-    def convert(self, value, param, ctx):
-        _ = param, ctx
-        if value is None or value.lower() == 'none' or value == '':
-            return []
-        return value.split(',')
+def parse_comma_separated(s):
+    if s is None or s.lower() == 'none' or s == '':
+        return []
+    return s.split(',')
 
 #----------------------------------------------------------------------------
 
-@click.command()
-@click.pass_context
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Train a StyleGAN2 ADA")
+    
+    # General options
+    parser.add_argument('--outdir', help='Where to save the results', required=True, metavar='DIR')
+    parser.add_argument('--gpus', help='Number of GPUs to use [default: 1]', type=int, metavar='INT')
+    parser.add_argument('--snap', help='Snapshot interval [default: 50 ticks]', type=int, metavar='INT')
+    parser.add_argument('--metrics', help='Comma-separated list or "none" [default: fid50k_full]', type=parse_comma_separated)
+    parser.add_argument('--seed', help='Random seed [default: 0]', type=int, metavar='INT')
+    parser.add_argument('-n', '--dry-run', help='Print training options and exit', action='store_true')
 
-# General options.
-@click.option('--outdir', help='Where to save the results', required=True, metavar='DIR')
-@click.option('--gpus', help='Number of GPUs to use [default: 1]', type=int, metavar='INT')
-@click.option('--snap', help='Snapshot interval [default: 50 ticks]', type=int, metavar='INT')
-@click.option('--metrics', help='Comma-separated list or "none" [default: fid50k_full]', type=CommaSeparatedList())
-@click.option('--seed', help='Random seed [default: 0]', type=int, metavar='INT')
-@click.option('-n', '--dry-run', help='Print training options and exit', is_flag=True)
+    # Dataset
+    parser.add_argument('--data', help='Training data (directory or zip)', metavar='PATH', required=True)
+    parser.add_argument('--cond', help='Train conditional model based on dataset labels [default: false]', type=bool, metavar='BOOL')
+    parser.add_argument('--subset', help='Train with only N images [default: all]', type=int, metavar='INT')
+    parser.add_argument('--mirror', help='Enable dataset x-flips [default: false]', type=bool, metavar='BOOL')
 
-# Dataset.
-@click.option('--data', help='Training data (directory or zip)', metavar='PATH', required=True)
-@click.option('--cond', help='Train conditional model based on dataset labels [default: false]', type=bool, metavar='BOOL')
-@click.option('--subset', help='Train with only N images [default: all]', type=int, metavar='INT')
-@click.option('--mirror', help='Enable dataset x-flips [default: false]', type=bool, metavar='BOOL')
+    # Base config
+    parser.add_argument('--cfg', help='Base config [default: auto]', choices=['auto', 'stylegan2', 'paper256', 'paper512', 'paper1024', 'cifar'])
+    parser.add_argument('--gamma', help='Override R1 gamma', type=float)
+    parser.add_argument('--kimg', help='Override training duration', type=int, metavar='INT')
+    parser.add_argument('--batch', help='Override batch size', type=int, metavar='INT')
 
-# Base config.
-@click.option('--cfg', help='Base config [default: auto]', type=click.Choice(['auto', 'stylegan2', 'paper256', 'paper512', 'paper1024', 'cifar']))
-@click.option('--gamma', help='Override R1 gamma', type=float)
-@click.option('--kimg', help='Override training duration', type=int, metavar='INT')
-@click.option('--batch', help='Override batch size', type=int, metavar='INT')
+    # Discriminator augmentation
+    parser.add_argument('--aug', help='Augmentation mode [default: ada]', choices=['noaug', 'ada', 'fixed'])
+    parser.add_argument('--p', help='Augmentation probability for --aug=fixed', type=float)
+    parser.add_argument('--target', help='ADA target value for --aug=ada', type=float)
+    parser.add_argument('--augpipe', help='Augmentation pipeline [default: bgc]', 
+                        choices=['blit', 'geom', 'color', 'filter', 'noise', 'cutout', 'bg', 'bgc', 'bgcf', 'bgcfn', 'bgcfnc'])
 
-# Discriminator augmentation.
-@click.option('--aug', help='Augmentation mode [default: ada]', type=click.Choice(['noaug', 'ada', 'fixed']))
-@click.option('--p', help='Augmentation probability for --aug=fixed', type=float)
-@click.option('--target', help='ADA target value for --aug=ada', type=float)
-@click.option('--augpipe', help='Augmentation pipeline [default: bgc]', type=click.Choice(['blit', 'geom', 'color', 'filter', 'noise', 'cutout', 'bg', 'bgc', 'bgcf', 'bgcfn', 'bgcfnc']))
+    # Transfer learning
+    parser.add_argument('--resume', help='Resume training [default: noresume]', metavar='PKL')
+    parser.add_argument('--freezed', help='Freeze-D [default: 0 layers]', type=int, metavar='INT')
 
-# Transfer learning.
-@click.option('--resume', help='Resume training [default: noresume]', metavar='PKL')
-@click.option('--freezed', help='Freeze-D [default: 0 layers]', type=int, metavar='INT')
+    # Performance options
+    parser.add_argument('--fp32', help='Disable mixed-precision training', action='store_true')
+    parser.add_argument('--nhwc', help='Use NHWC memory format with FP16', action='store_true')
+    parser.add_argument('--nobench', help='Disable cuDNN benchmarking', action='store_true')
+    parser.add_argument('--allow-tf32', help='Allow PyTorch to use TF32 internally', action='store_true')
+    parser.add_argument('--workers', help='Override number of DataLoader workers', type=int, metavar='INT')
 
-# Performance options.
-@click.option('--fp32', help='Disable mixed-precision training', type=bool, metavar='BOOL')
-@click.option('--nhwc', help='Use NHWC memory format with FP16', type=bool, metavar='BOOL')
-@click.option('--nobench', help='Disable cuDNN benchmarking', type=bool, metavar='BOOL')
-@click.option('--allow-tf32', help='Allow PyTorch to use TF32 internally', type=bool, metavar='BOOL')
-@click.option('--workers', help='Override number of DataLoader workers', type=int, metavar='INT')
+    args = parser.parse_args()
 
-def main(ctx, outdir, dry_run, **config_kwargs):
-    """Train a GAN using the techniques described in the paper
-    "Training Generative Adversarial Networks with Limited Data".
-
-    Examples:
-
-    \b
-    # Train with custom dataset using 1 GPU.
-    python train.py --outdir=~/training-runs --data=~/mydataset.zip --gpus=1
-
-    \b
-    # Train class-conditional CIFAR-10 using 2 GPUs.
-    python train.py --outdir=~/training-runs --data=~/datasets/cifar10.zip \\
-        --gpus=2 --cfg=cifar --cond=1
-
-    \b
-    # Transfer learn MetFaces from FFHQ using 4 GPUs.
-    python train.py --outdir=~/training-runs --data=~/datasets/metfaces.zip \\
-        --gpus=4 --cfg=paper1024 --mirror=1 --resume=ffhq1024 --snap=10
-
-    \b
-    # Reproduce original StyleGAN2 config F.
-    python train.py --outdir=~/training-runs --data=~/datasets/ffhq.zip \\
-        --gpus=8 --cfg=stylegan2 --mirror=1 --aug=noaug
-
-    \b
-    Base configs (--cfg):
-      auto       Automatically select reasonable defaults based on resolution
-                 and GPU count. Good starting point for new datasets.
-      stylegan2  Reproduce results for StyleGAN2 config F at 1024x1024.
-      paper256   Reproduce results for FFHQ and LSUN Cat at 256x256.
-      paper512   Reproduce results for BreCaHAD and AFHQ at 512x512.
-      paper1024  Reproduce results for MetFaces at 1024x1024.
-      cifar      Reproduce results for CIFAR-10 at 32x32.
-
-    \b
-    Transfer learning source networks (--resume):
-      ffhq256        FFHQ trained at 256x256 resolution.
-      ffhq512        FFHQ trained at 512x512 resolution.
-      ffhq1024       FFHQ trained at 1024x1024 resolution.
-      celebahq256    CelebA-HQ trained at 256x256 resolution.
-      lsundog256     LSUN Dog trained at 256x256 resolution.
-      <PATH or URL>  Custom network pickle.
-    """
     dnnlib.util.Logger(should_flush=True)
 
     # Setup training options.
+    # Setup training options.
     try:
-        run_desc, args = setup_training_loop_kwargs(**config_kwargs)
+        run_desc, args_dict = setup_training_loop_kwargs(
+            gpus=args.gpus,
+            snap=args.snap,
+            metrics=args.metrics,
+            seed=args.seed,
+            data=args.data,
+            cond=args.cond,
+            subset=args.subset,
+            mirror=args.mirror,
+            cfg=args.cfg,
+            gamma=args.gamma,
+            kimg=args.kimg,
+            batch=args.batch,
+            aug=args.aug,
+            p=args.p,
+            target=args.target,
+            augpipe=args.augpipe,
+            resume=args.resume,
+            freezed=args.freezed,
+            fp32=args.fp32,
+            nhwc=args.nhwc,
+            nobench=args.nobench,
+            allow_tf32=args.allow_tf32,
+            workers=args.workers
+        )
     except UserError as err:
-        ctx.fail(err)
+        print(f"Error: {err}")
+        sys.exit(0)
 
     # Pick output directory.
     prev_run_dirs = []
-    if os.path.isdir(outdir):
-        prev_run_dirs = [x for x in os.listdir(outdir) if os.path.isdir(os.path.join(outdir, x))]
+    if os.path.isdir(args.outdir):
+        prev_run_dirs = [x for x in os.listdir(args.outdir) if os.path.isdir(os.path.join(args.outdir, x))]
     prev_run_ids = [re.match(r'^\d+', x) for x in prev_run_dirs]
     prev_run_ids = [int(x.group()) for x in prev_run_ids if x is not None]
     cur_run_id = max(prev_run_ids, default=-1) + 1
-    args.run_dir = os.path.join(outdir, f'{cur_run_id:05d}-{run_desc}')
-    assert not os.path.exists(args.run_dir)
+    args_dict['run_dir'] = os.path.join(args.outdir, f'{cur_run_id:05d}-{run_desc}')
+    assert not os.path.exists(args_dict['run_dir'])
 
     # Print options.
     print()
     print('Training options:')
-    print(json.dumps(args, indent=2))
+    print(json.dumps(args_dict, indent=2))
     print()
-    print(f'Output directory:   {args.run_dir}')
-    print(f'Training data:      {args.training_set_kwargs.path}')
-    print(f'Training duration:  {args.total_kimg} kimg')
-    print(f'Number of GPUs:     {args.num_gpus}')
-    print(f'Number of images:   {args.training_set_kwargs.max_size}')
-    print(f'Image resolution:   {args.training_set_kwargs.resolution}')
-    print(f'Conditional model:  {args.training_set_kwargs.use_labels}')
-    print(f'Dataset x-flips:    {args.training_set_kwargs.xflip}')
+    print(f'Output directory:   {args_dict["run_dir"]}')
+    print(f'Training data:      {args_dict["training_set_kwargs"].path}')
+    print(f'Training duration:  {args_dict["total_kimg"]} kimg')
+    print(f'Number of GPUs:     {args_dict["num_gpus"]}')
+    print(f'Number of images:   {args_dict["training_set_kwargs"].max_size}')
+    print(f'Image resolution:   {args_dict["training_set_kwargs"].resolution}')
+    print(f'Conditional model:  {args_dict["training_set_kwargs"].use_labels}')
+    print(f'Dataset x-flips:    {args_dict["training_set_kwargs"].xflip}')
     print()
 
     # Dry run?
-    if dry_run:
+    if args.dry_run:
         print('Dry run; exiting.')
-        return
+        sys.exit(0)
 
     # Create output directory.
     print('Creating output directory...')
-    os.makedirs(args.run_dir)
-    with open(os.path.join(args.run_dir, 'training_options.json'), 'wt') as f:
-        json.dump(args, f, indent=2)
+    os.makedirs(args_dict['run_dir'])
+    with open(os.path.join(args_dict['run_dir'], 'training_options.json'), 'wt') as f:
+        json.dump(args_dict, f, indent=2)
 
     # Launch processes.
     print('Launching processes...')
     torch.multiprocessing.set_start_method('spawn')
     with tempfile.TemporaryDirectory() as temp_dir:
-        if args.num_gpus == 1:
-            subprocess_fn(rank=0, args=args, temp_dir=temp_dir)
+        if args_dict['num_gpus'] == 1:
+            subprocess_fn(rank=0, args=args_dict, temp_dir=temp_dir)
         else:
-            torch.multiprocessing.spawn(fn=subprocess_fn, args=(args, temp_dir), nprocs=args.num_gpus)
-
-#----------------------------------------------------------------------------
-
-if __name__ == "__main__":
-    main() # pylint: disable=no-value-for-parameter
+            torch.multiprocessing.spawn(fn=subprocess_fn, args=(args_dict, temp_dir), nprocs=args_dict['num_gpus'])
 
 #----------------------------------------------------------------------------
