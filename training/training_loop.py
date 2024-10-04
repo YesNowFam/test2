@@ -58,6 +58,9 @@ def _setup_augmentation(rank, augment_kwargs, augment_p, ada_target, device):
     if rank == 0:
         print('Setting up augmentation...')
 
+    augment_pipe = None
+    ada_stats = None
+
     if (augment_kwargs is not None) and (augment_p > 0 or ada_target is not None):
         augment_pipe = dnnlib.util.construct_class_by_name(**augment_kwargs).train().requires_grad_(False).to(device) # subclass of torch.nn.Module
         augment_pipe.p.copy_(torch.as_tensor(augment_p))
@@ -69,6 +72,8 @@ def _setup_augmentation(rank, augment_kwargs, augment_p, ada_target, device):
 def _distribute_across_gpus(rank, num_gpus, G, D, G_ema, augment_pipe, device):
     if rank == 0:
         print(f'Distributing across {num_gpus} GPUs...')
+
+    
     ddp_modules = dict()
     for name, module in [('G_mapping', G.mapping), ('G_synthesis', G.synthesis), ('D', D), (None, G_ema), ('augment_pipe', augment_pipe)]:
         if (num_gpus > 1) and (module is not None) and len(list(module.parameters())) != 0:
@@ -77,6 +82,8 @@ def _distribute_across_gpus(rank, num_gpus, G, D, G_ema, augment_pipe, device):
             module.requires_grad_(False)
         if name is not None:
             ddp_modules[name] = module
+
+    return ddp_modules
 
 def training_loop(
     run_dir                 = '.',      # Output directory for results and checkpoints
@@ -143,10 +150,7 @@ def training_loop(
     _print_summary(rank, batch_gpu, G, D, device)
 
     # Setup augmentation.
-    augment_pipe = None
-    ada_stats = None
     augment_pipe, ada_stats = _setup_augmentation(rank, augment_kwargs, augment_p, ada_target, device)
-    
     
     # Distribute across GPUs.
     ddp_modules = _distribute_across_gpus(rank, num_gpus, G, D, G_ema, augment_pipe, device)
