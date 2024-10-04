@@ -112,81 +112,7 @@ def _setup_training_phases(rank, ddp_modules, loss_kwargs, G, G_opt_kwargs, G_re
     return loss, phases
 
 
-def training_loop(
-    run_dir                 = '.',      # Output directory for results and checkpoints
-    training_set_kwargs     = {},       # Options for training dataset
-    data_loader_kwargs      = {},       # Options for torch.utils.data.DataLoader
-    G_kwargs                = {},       # Options for generator network
-    D_kwargs                = {},       # Options for discriminator network
-    G_opt_kwargs            = {},       # Options for generator optimizer
-    D_opt_kwargs            = {},       # Options for discriminator optimizer
-    augment_kwargs          = None,     # Options for augmentation pipeline (None = disable)
-    loss_kwargs             = {},       # Options for loss function
-    metrics                 = [],       # Metrics to evaluate during training
-    random_seed             = 0,        # Global random seed for reproducibility
-    num_gpus                = 1,        # Number of GPUs for distributed training
-    rank                    = 0,        # Rank of current process in multi-GPU setup (0 to num_gpus-1)
-    batch_size              = 4,        # Total batch size for one training iteration
-    batch_gpu               = 4,        # Number of samples processed at a time by one GPU
-    ema_kimg                = 10,       # Half-life of exponential moving average (EMA) of generator weights
-    ema_rampup              = None,     # EMA ramp-up coefficient for smooth startup
-    G_reg_interval          = 4,        # Frequency of generator regularization (None = disable)
-    D_reg_interval          = 16,       # Frequency of discriminator regularization (None = disable)
-    augment_p               = 0,        # Initial augmentation probability
-    ada_target              = None,     # ADA target value (None for fixed augmentation probability)
-    ada_interval            = 4,        # Frequency of ADA adjustments
-    ada_kimg                = 500,      # ADA adjustment speed (lower is faster)
-    total_kimg              = 25000,    # Total length of training in thousands of images
-    kimg_per_tick           = 4,        # Progress snapshot interval in thousands of images
-    image_snapshot_ticks    = 50,       # Frequency of saving image snapshots (None to disable)
-    network_snapshot_ticks  = 50,       # Frequency of saving network checkpoints (None to disable)
-    resume_pkl              = None,     # Network pickle to resume training from
-    cudnn_benchmark         = True,     # Enable cuDNN benchmarking for potential performance boost
-    allow_tf32              = False,    # Allow TensorFloat-32 on Ampere GPUs
-    abort_fn                = None,     # Callback function to determine if training should be aborted. Must return consistent results across ranks.
-    progress_fn             = None,     # Callback function for updating training progress. Called for all ranks.
-):
-    
-    # Initialize.
-    start_time = time.time()
-    device = torch.device('cuda', rank)
-    np.random.seed(random_seed * num_gpus + rank)
-    torch.manual_seed(random_seed * num_gpus + rank)
-    torch.backends.cudnn.benchmark = cudnn_benchmark    # Improves training speed.
-    torch.backends.cuda.matmul.allow_tf32 = allow_tf32  # Allow PyTorch to internally use tf32 for matmul
-    torch.backends.cudnn.allow_tf32 = allow_tf32        # Allow PyTorch to internally use tf32 for convolutions
-    conv2d_gradfix.enabled = True                       # Improves training speed.
-    grid_sample_gradfix.enabled = True                  # Avoids errors with the augmentation pipe.
-
-    # Load training set.
-    training_set, training_set_iterator = _load_training_set(rank, training_set_kwargs, num_gpus, random_seed, batch_size, data_loader_kwargs)
-    
-    # Construct networks. Generator, Discriminator, and Exponential Moving Average Generator.
-    G, D, G_ema = _construct_networks(rank, training_set, G_kwargs, D_kwargs, device)
-    
-
-    # Resume training from existing pickle.
-    if (resume_pkl is not None) and (rank == 0):
-        print(f'Resuming from "{resume_pkl}"')
-        with dnnlib.util.open_url(resume_pkl) as f:
-            resume_data = legacy.load_network_pkl(f)
-        for name, module in [('G', G), ('D', D), ('G_ema', G_ema)]:
-            misc.copy_params_and_buffers(resume_data[name], module, require_all=False)
-
-    # Print network summary tables.
-    _print_summary(rank, batch_gpu, G, D, device)
-
-    # Setup augmentation.
-    augment_pipe, ada_stats = _setup_augmentation(rank, augment_kwargs, augment_p, ada_target, device)
-    
-    # Distribute across GPUs.
-    ddp_modules = _distribute_across_gpus(rank, num_gpus, G, D, G_ema, augment_pipe, device)
-    
-    # Setup training phases.
-    loss, phases = _setup_training_phases(rank, ddp_modules, loss_kwargs, G, G_opt_kwargs, G_reg_interval, D, D_opt_kwargs, D_reg_interval, device)
-    
-
-    # Export sample images.
+def _save_sample_images(rank, training_set, run_dir, G, G_ema, batch_gpu, device):
     grid_size = None
     grid_z = None
     grid_c = None
@@ -199,22 +125,46 @@ def training_loop(
         images = torch.cat([G_ema(z=z, c=c, noise_mode='const').cpu() for z, c in zip(grid_z, grid_c)]).numpy()
         save_image_grid(images, os.path.join(run_dir, 'fakes_init.png'), drange=[-1,1], grid_size=grid_size)
 
-    # Initialize logs.
-    if rank == 0:
-        print('Initializing logs...')
-    stats_collector = training_stats.Collector(regex='.*')
-    stats_metrics = dict()
-    stats_jsonl = None
-    stats_tfevents = None
-    if rank == 0:
-        stats_jsonl = open(os.path.join(run_dir, 'stats.jsonl'), 'wt')
-        try:
-            import torch.utils.tensorboard as tensorboard
-            stats_tfevents = tensorboard.SummaryWriter(run_dir)
-        except ImportError as err:
-            print('Skipping tfevents export:', err)
+    return grid_size, grid_z, grid_c
 
-    # Train.
+
+def _train(training_set_iterator, 
+           phases, 
+           batch_size, 
+           training_set, 
+           G, 
+           num_gpus, 
+           loss, 
+           ema_rampup, 
+           ema_kimg,
+           ada_stats,
+           ada_interval,
+           ada_target,
+           ada_kimg,
+           augment_pipe,
+           total_kimg,
+           G_ema,
+           kimg_per_tick,
+           start_time,
+           rank,
+           abort_fn,
+           image_snapshot_ticks,
+           network_snapshot_ticks,
+           run_dir,
+           grid_z,
+           grid_size,
+           training_set_kwargs,
+           metrics,
+           stats_metrics,
+           stats_collector,
+           grid_c,
+           stats_jsonl,
+           stats_tfevents,
+           D,
+           progress_fn,
+           batch_gpu, 
+           device):
+    
     if rank == 0:
         print(f'Training for {total_kimg} kimg...')
         print()
@@ -226,6 +176,7 @@ def training_loop(
     batch_idx = 0
     if progress_fn is not None:
         progress_fn(0, total_kimg)
+
     while True:
 
         # Fetch training data.
@@ -385,6 +336,137 @@ def training_loop(
         maintenance_time = tick_start_time - tick_end_time
         if done:
             break
+
+
+def training_loop(
+    run_dir                 = '.',      # Output directory for results and checkpoints
+    training_set_kwargs     = {},       # Options for training dataset
+    data_loader_kwargs      = {},       # Options for torch.utils.data.DataLoader
+    G_kwargs                = {},       # Options for generator network
+    D_kwargs                = {},       # Options for discriminator network
+    G_opt_kwargs            = {},       # Options for generator optimizer
+    D_opt_kwargs            = {},       # Options for discriminator optimizer
+    augment_kwargs          = None,     # Options for augmentation pipeline (None = disable)
+    loss_kwargs             = {},       # Options for loss function
+    metrics                 = [],       # Metrics to evaluate during training
+    random_seed             = 0,        # Global random seed for reproducibility
+    num_gpus                = 1,        # Number of GPUs for distributed training
+    rank                    = 0,        # Rank of current process in multi-GPU setup (0 to num_gpus-1)
+    batch_size              = 4,        # Total batch size for one training iteration
+    batch_gpu               = 4,        # Number of samples processed at a time by one GPU
+    ema_kimg                = 10,       # Half-life of exponential moving average (EMA) of generator weights
+    ema_rampup              = None,     # EMA ramp-up coefficient for smooth startup
+    G_reg_interval          = 4,        # Frequency of generator regularization (None = disable)
+    D_reg_interval          = 16,       # Frequency of discriminator regularization (None = disable)
+    augment_p               = 0,        # Initial augmentation probability
+    ada_target              = None,     # ADA target value (None for fixed augmentation probability)
+    ada_interval            = 4,        # Frequency of ADA adjustments
+    ada_kimg                = 500,      # ADA adjustment speed (lower is faster)
+    total_kimg              = 25000,    # Total length of training in thousands of images
+    kimg_per_tick           = 4,        # Progress snapshot interval in thousands of images
+    image_snapshot_ticks    = 50,       # Frequency of saving image snapshots (None to disable)
+    network_snapshot_ticks  = 50,       # Frequency of saving network checkpoints (None to disable)
+    resume_pkl              = None,     # Network pickle to resume training from
+    cudnn_benchmark         = True,     # Enable cuDNN benchmarking for potential performance boost
+    allow_tf32              = False,    # Allow TensorFloat-32 on Ampere GPUs
+    abort_fn                = None,     # Callback function to determine if training should be aborted. Must return consistent results across ranks.
+    progress_fn             = None,     # Callback function for updating training progress. Called for all ranks.
+):
+    
+    # Initialize.
+    start_time = time.time()
+    device = torch.device('cuda', rank)
+    np.random.seed(random_seed * num_gpus + rank)
+    torch.manual_seed(random_seed * num_gpus + rank)
+    torch.backends.cudnn.benchmark = cudnn_benchmark    # Improves training speed.
+    torch.backends.cuda.matmul.allow_tf32 = allow_tf32  # Allow PyTorch to internally use tf32 for matmul
+    torch.backends.cudnn.allow_tf32 = allow_tf32        # Allow PyTorch to internally use tf32 for convolutions
+    conv2d_gradfix.enabled = True                       # Improves training speed.
+    grid_sample_gradfix.enabled = True                  # Avoids errors with the augmentation pipe.
+
+    # Load training set.
+    training_set, training_set_iterator = _load_training_set(rank, training_set_kwargs, num_gpus, random_seed, batch_size, data_loader_kwargs)
+    
+    # Construct networks. Generator, Discriminator, and Exponential Moving Average Generator.
+    G, D, G_ema = _construct_networks(rank, training_set, G_kwargs, D_kwargs, device)
+    
+
+    # Resume training from existing pickle.
+    if (resume_pkl is not None) and (rank == 0):
+        print(f'Resuming from "{resume_pkl}"')
+        with dnnlib.util.open_url(resume_pkl) as f:
+            resume_data = legacy.load_network_pkl(f)
+        for name, module in [('G', G), ('D', D), ('G_ema', G_ema)]:
+            misc.copy_params_and_buffers(resume_data[name], module, require_all=False)
+
+    # Print network summary tables.
+    _print_summary(rank, batch_gpu, G, D, device)
+
+    # Setup augmentation.
+    augment_pipe, ada_stats = _setup_augmentation(rank, augment_kwargs, augment_p, ada_target, device)
+    
+    # Distribute across GPUs.
+    ddp_modules = _distribute_across_gpus(rank, num_gpus, G, D, G_ema, augment_pipe, device)
+    
+    # Setup training phases.
+    loss, phases = _setup_training_phases(rank, ddp_modules, loss_kwargs, G, G_opt_kwargs, G_reg_interval, D, D_opt_kwargs, D_reg_interval, device)
+    
+    # Export sample images.
+    grid_size, grid_z, grid_c = _save_sample_images(rank, training_set, run_dir, G, G_ema, batch_gpu, device)
+    
+
+    # Initialize logs.
+    if rank == 0:
+        print('Initializing logs...')
+    stats_collector = training_stats.Collector(regex='.*')
+    stats_metrics = dict()
+    stats_jsonl = None
+    stats_tfevents = None
+    if rank == 0:
+        stats_jsonl = open(os.path.join(run_dir, 'stats.jsonl'), 'wt')
+        try:
+            import torch.utils.tensorboard as tensorboard
+            stats_tfevents = tensorboard.SummaryWriter(run_dir)
+        except ImportError as err:
+            print('Skipping tfevents export:', err)
+
+    # Train.
+    _train(training_set_iterator, 
+           phases, 
+           batch_size, 
+           training_set, 
+           G, 
+           num_gpus, 
+           loss, 
+           ema_rampup, 
+           ema_kimg,
+           ada_stats,
+           ada_interval,
+           ada_target,
+           ada_kimg,
+           augment_pipe,
+           total_kimg,
+           G_ema,
+           kimg_per_tick,
+           start_time,
+           rank,
+           abort_fn,
+           image_snapshot_ticks,
+           network_snapshot_ticks,
+           run_dir,
+           grid_z,
+           grid_size,
+           training_set_kwargs,
+           metrics,
+           stats_metrics,
+           stats_collector,
+           grid_c,
+           stats_jsonl,
+           stats_tfevents,
+           D,
+           progress_fn,
+           batch_gpu, 
+           device)
 
     # Done.
     if rank == 0:
