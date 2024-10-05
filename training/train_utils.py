@@ -338,7 +338,7 @@ def _train(training_set_iterator,
             break
 
 
-def training_loop(
+def train(
     run_dir                 = '.',      # Output directory for results and checkpoints
     training_set_kwargs     = {},       # Options for training dataset
     data_loader_kwargs      = {},       # Options for torch.utils.data.DataLoader
@@ -372,7 +372,9 @@ def training_loop(
     abort_fn                = None,     # Callback function to determine if training should be aborted. Must return consistent results across ranks.
     progress_fn             = None,     # Callback function for updating training progress. Called for all ranks.
 ):
-    
+    """
+    run a training job
+    """
     # Initialize.
     start_time = time.time()
     device = torch.device('cuda', rank)
