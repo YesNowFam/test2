@@ -6,7 +6,7 @@ import torch
 import dnnlib
 import argparse
 import sys
-from training import training_loop
+from training import train_utils
 from metrics import metric_main
 from torch_utils import training_stats
 from torch_utils import custom_ops
@@ -358,7 +358,7 @@ def subprocess_fn(rank, args, temp_dir):
         custom_ops.verbosity = 'none'
 
     # Execute training loop.
-    training_loop.training_loop(rank=rank, **args)
+    train_utils.train(rank=rank, **args)
 
 #----------------------------------------------------------------------------
 
