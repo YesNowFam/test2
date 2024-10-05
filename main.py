@@ -6,7 +6,7 @@ import torch
 import dnnlib
 import argparse
 import sys
-from training import train_utils
+from train_utils import train_utils
 from metrics import metric_main
 from torch_utils import training_stats
 from torch_utils import custom_ops
