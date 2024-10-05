@@ -471,4 +471,4 @@ def training_loop(
     # Done.
     if rank == 0:
         print()
-        print('Exiting...')
+        print('Training finished. Exiting...')
