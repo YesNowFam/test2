@@ -5,15 +5,8 @@ from torch_utils import training_stats
 from torch_utils import misc
 from torch_utils.ops import conv2d_gradfix
 
-#----------------------------------------------------------------------------
 
-class Loss:
-    def accumulate_gradients(self, phase, real_img, real_c, gen_z, gen_c, sync, gain): # to be overridden by subclass
-        raise NotImplementedError()
-
-#----------------------------------------------------------------------------
-
-class StyleGAN2Loss(Loss):
+class StyleGAN2Loss:
     def __init__(self, device, G_mapping, G_synthesis, D, augment_pipe=None, style_mixing_prob=0.9, r1_gamma=10, pl_batch_shrink=2, pl_decay=0.01, pl_weight=2):
         super().__init__()
         self.device = device
