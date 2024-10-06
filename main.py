@@ -376,13 +376,13 @@ if __name__ == "__main__":
     parser.add_argument('--outdir', help='Where to save the results', required=True, metavar='DIR')
     parser.add_argument('--gpus', help='Number of GPUs to use [default: 1]', type=int, metavar='INT')
     parser.add_argument('--snap', help='Snapshot interval [default: 50 ticks]', type=int, metavar='INT')
-    parser.add_argument('--metrics', help='Comma-separated list or "none" [default: fid50k_full]', type=parse_comma_separated)
+    parser.add_argument('--metrics', help='Comma-separated list or "none" [default: fid50k_full]', type=parse_comma_separated) # use default
     parser.add_argument('--seed', help='Random seed [default: 0]', type=int, metavar='INT')
     parser.add_argument('-n', '--dry-run', help='Print training options and exit', action='store_true')
 
     # Dataset
     parser.add_argument('--data', help='Training data (directory or zip)', metavar='PATH', required=True)
-    parser.add_argument('--cond', help='Train conditional model based on dataset labels [default: false]', type=bool, metavar='BOOL')
+    parser.add_argument('--cond', help='Train conditional model based on dataset labels [default: false]', type=bool, metavar='BOOL') # default is false
     parser.add_argument('--subset', help='Train with only N images [default: all]', type=int, metavar='INT')
     parser.add_argument('--mirror', help='Enable dataset x-flips [default: false]', type=bool, metavar='BOOL')
 
@@ -394,7 +394,7 @@ if __name__ == "__main__":
 
     # Discriminator augmentation
     parser.add_argument('--aug', help='Augmentation mode [default: ada]', choices=['noaug', 'ada', 'fixed'])
-    parser.add_argument('--p', help='Augmentation probability for --aug=fixed', type=float)
+    parser.add_argument('--p', help='Augmentation probability for --aug=fixed', type=float) # can remove
     parser.add_argument('--target', help='ADA target value for --aug=ada', type=float)
     parser.add_argument('--augpipe', help='Augmentation pipeline [default: bgc]', 
                         choices=['blit', 'geom', 'color', 'filter', 'noise', 'cutout', 'bg', 'bgc', 'bgcf', 'bgcfn', 'bgcfnc'])
